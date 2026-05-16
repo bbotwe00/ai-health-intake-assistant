@@ -2,6 +2,11 @@ import { useState } from 'react'
 
 const AGE_RANGES  = ['Under 18','18–30','31–45','46–60','61–75','75+','Prefer not to say']
 const SEVERITIES  = ['Mild','Moderate','Severe']
+const EXAMPLES    = [
+  'Chest pain and shortness of breath for 2 days, worse with exertion.',
+  'Severe headache, fever of 102°F, and stiff neck since yesterday.',
+  'Abdominal pain in the lower right quadrant, nausea, no appetite for 3 days.',
+]
 
 export default function SymptomForm({ onSubmit, loading }) {
   const [symptoms, setSymptoms]   = useState('')
@@ -58,6 +63,20 @@ export default function SymptomForm({ onSubmit, loading }) {
           </div>
         </div>
 
+        {/* Example prompts */}
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{color:'var(--ink-3)'}}>Example inputs</p>
+          <div className="space-y-2">
+            {EXAMPLES.map((ex, i) => (
+              <button key={i} type="button" onClick={() => setSymptoms(ex)}
+                className="w-full text-left rounded-lg border px-3 py-2 text-xs transition-all hover:border-[var(--teal-mid)] hover:bg-[var(--teal-light)]"
+                style={{borderColor:'var(--border)', color:'var(--ink-2)', background:'var(--bg)'}}>
+                <span style={{color:'var(--teal)', marginRight:'6px'}}>→</span>{ex}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Optional fields */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
@@ -107,8 +126,8 @@ export default function SymptomForm({ onSubmit, loading }) {
         </button>
 
         <p className="text-xs text-center" style={{color:'var(--ink-3)'}}>
-  For clinical documentation only.
-</p>
+          This tool assists with intake documentation only. It does not diagnose or prescribe.
+        </p>
       </form>
     </div>
   )

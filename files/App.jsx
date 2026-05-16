@@ -71,11 +71,10 @@ export default function App() {
               style={{borderColor:'var(--border)', color:'var(--ink-3)', background:'var(--bg)'}}>
               AI-Assisted Documentation
             </span>
-            <span className="text-xs px-3 py-1.5 rounded-full font-semibold flex items-center gap-1.5"
-  style={{background:'var(--green-light)', color:'var(--green)', border:'1px solid var(--green-mid)'}}>
-  <span className="w-1.5 h-1.5 rounded-full inline-block pulse-dot" style={{background:'var(--green)'}}></span>
-  System Online
-</span>
+            <span className="text-xs px-3 py-1.5 rounded-full font-semibold"
+              style={{background:'var(--amber-light)', color:'var(--amber)', border:'1px solid var(--amber-mid)'}}>
+              ⚠ Not Medical Advice
+            </span>
           </div>
         </div>
       </header>
