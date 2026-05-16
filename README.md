@@ -29,10 +29,10 @@ Healthcare staff spend significant time manually collecting, interpreting, and d
 ![Intake Form](docs/screenshots/form.png)
 
 ### AI Clinical Summary
-![Clinical Summary](docs/screenshots/result.png)
+![Clinical Summary](docs/screenshots/print.png)
 
 ### Print / Export View
-![Print View](docs/screenshots/print.png)
+![Print View](docs/screenshots/form.png)
 
 ---
 
