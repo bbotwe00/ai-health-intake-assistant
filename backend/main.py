@@ -9,7 +9,7 @@ app = FastAPI(title="AI Health Intake Assistant", version="1.0.0")
 # Allow requests from your React frontend (adjust origin in production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_origins=["http://localhost:3000", "http://localhost:5173", "https://ai-health-intake-assistant.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
