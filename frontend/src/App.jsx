@@ -29,7 +29,7 @@ export default function App() {
       setHistory(prev => [entry, ...prev])
       setResult(data.result)
     } catch (e) {
-      setError(e.message)
+      setError(e.message.includes("429") ? "Our AI service is temporarily busy. Please wait a moment and try again." : e.message)
     } finally {
       setLoading(false)
     }
