@@ -1,63 +1,102 @@
-# AI Healthcare Intake & Clinical Summary Assistant
+# IntakeAI — AI Healthcare Intake & Clinical Summary Assistant
 
-An AI-powered intake assistant that converts unstructured patient symptom descriptions into structured clinical summaries for healthcare staff.
+> An AI-powered intake assistant that converts unstructured patient symptom descriptions into structured clinical summaries for healthcare staff.
+
+![Clinical Summary Result](docs/screenshots/result.png)
 
 ---
 
 ## ⚠️ Disclaimer
 
-This tool is for **documentation and intake assistance only**. It does **not** diagnose diseases, prescribe treatment, or claim medical certainty. Always consult a licensed healthcare professional.
+This tool is for **documentation and intake assistance only**. It does **not** diagnose diseases, prescribe treatment, or claim medical certainty. All clinical decisions must be made by a licensed healthcare provider.
+
+---
+
+## 🧠 Overview
+
+Healthcare staff spend significant time manually collecting, interpreting, and documenting patient symptoms during intake. This leads to inconsistent documentation, longer wait times, and provider burnout.
+
+**IntakeAI** solves this by:
+- Accepting patient symptom input in plain natural language
+- Sending it to Google Gemini AI for structured extraction
+- Returning a clean clinical intake summary to healthcare staff in seconds
+
+---
+
+## 📸 Screenshots
+
+### Patient Intake Form
+![Intake Form](docs/screenshots/form.png)
+
+### AI Clinical Summary
+![Clinical Summary](docs/screenshots/result.png)
+
+### Print / Export View
+![Print View](docs/screenshots/print.png)
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-Frontend (React + Tailwind)
-        ↓
-Backend API (FastAPI)
-        ↓
-Google Gemini API (gemini-1.5-flash)
-        ↓
-Structured JSON Output
-        ↓
-Provider Dashboard
+Patient (Browser)
+    → React Frontend (Vite + Tailwind)
+        → POST /analyze
+            → FastAPI Backend (Python)
+                → Google Gemini 2.5 Flash API
+                    ← Structured JSON
+                ← { chief_complaint, duration, urgency, department, summary }
+            ← Clinical Summary Card
 ```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer     | Technology                        |
+|-----------|-----------------------------------|
+| Frontend  | React 18, TailwindCSS, Vite       |
+| Backend   | Python 3.13, FastAPI, uvicorn     |
+| AI        | Google Gemini 2.5 Flash           |
+| HTTP      | httpx (async)                     |
+| Config    | python-dotenv                     |
 
 ---
 
 ## 🚀 Quick Start
 
-### 1. Backend
+### Prerequisites
+- Python 3.10+
+- Node.js 18+
+- Google Gemini API key → [Get one free](https://aistudio.google.com/apikey)
 
+### 1. Clone the repo
+```bash
+git clone https://github.com/bbotwe00/ai-health-intake-assistant.git
+cd ai-health-intake-assistant
+```
+
+### 2. Backend setup
 ```bash
 cd backend
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+python3 -m venv venv
+source venv/bin/activate
+pip install fastapi uvicorn httpx python-dotenv "pydantic>=2.7" certifi --only-binary=:all:
 
 cp .env.example .env
 # Edit .env and add your GEMINI_API_KEY
 
-uvicorn main:app --reload --port 8000
+python3 -m uvicorn main:app --reload --port 8000
 ```
 
-Backend runs at: http://localhost:8000
-API docs at:     http://localhost:8000/docs
-
----
-
-### 2. Frontend
-
+### 3. Frontend setup
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend runs at: http://localhost:5173
-
-> Make sure the backend is running before using the frontend.
+Open **http://localhost:5173** in your browser.
 
 ---
 
@@ -82,23 +121,25 @@ Frontend runs at: http://localhost:5173
     "chief_complaint": "Chest pain and shortness of breath",
     "duration": "2 days",
     "urgency": "High",
-    "suggested_department": "Cardiology / Urgent Care",
-    "summary": "Patient reports chest pain and difficulty breathing persisting for 2 days."
+    "suggested_department": "Emergency Department / Cardiology",
+    "summary": "Patient reports chest pain and difficulty breathing persisting for 2 days, exacerbated by physical exertion."
   }
 }
 ```
 
+Interactive API docs: `http://localhost:8000/docs`
+
 ---
 
-## 🛠️ Tech Stack
+## 🤖 AI Safety Constraints
 
-| Layer     | Technology                  |
-|-----------|-----------------------------|
-| Frontend  | React, TailwindCSS, Vite    |
-| Backend   | Python, FastAPI             |
-| AI        | Google Gemini 1.5 Flash     |
-| HTTP      | httpx (async)               |
-| Config    | python-dotenv               |
+The Gemini prompt is explicitly constrained to:
+- ✅ Extract and structure symptom information
+- ✅ Classify urgency (Low / Medium / High)
+- ✅ Suggest relevant departments
+- ❌ Never diagnose diseases
+- ❌ Never recommend treatment or medication
+- ❌ Never claim medical certainty
 
 ---
 
@@ -106,14 +147,11 @@ Frontend runs at: http://localhost:5173
 
 ```
 ai-health-intake-assistant/
-│
 ├── backend/
-│   ├── main.py           # FastAPI app + routes
-│   ├── ai_service.py     # Gemini API integration
+│   ├── main.py
+│   ├── ai_service.py
 │   ├── requirements.txt
-│   ├── .env.example
-│   └── .env              # (you create this, never commit it)
-│
+│   └── .env.example
 ├── frontend/
 │   ├── src/
 │   │   ├── App.jsx
@@ -121,13 +159,11 @@ ai-health-intake-assistant/
 │   │   │   ├── SymptomForm.jsx
 │   │   │   └── IntakeSummary.jsx
 │   │   └── main.jsx
-│   ├── package.json
 │   └── index.html
-│
 ├── docs/
+│   ├── screenshots/
 │   ├── architecture.md
 │   └── development-log.md
-│
 └── README.md
 ```
 
@@ -137,3 +173,9 @@ ai-health-intake-assistant/
 
 - **Phase 2**: Voice-to-text intake, multilingual support, severity scoring
 - **Phase 3**: EHR integration (FHIR), appointment scheduling, insurance pre-check
+
+---
+
+## 👤 Author
+
+Built by [@bbotwe00](https://github.com/bbotwe00)
