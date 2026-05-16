@@ -32,7 +32,7 @@ Healthcare staff spend significant time manually collecting, interpreting, and d
 ![Clinical Summary](docs/screenshots/print.png)
 
 ### Print / Export View
-![Print View](docs/screenshots/form.png)
+![Print View](docs/screenshots/print.png)
 
 ---
 
