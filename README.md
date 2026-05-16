@@ -2,7 +2,7 @@
 
 > An AI-powered intake assistant that converts unstructured patient symptom descriptions into structured clinical summaries for healthcare staff.
 
-![Clinical Summary Result](docs/screenshots/result.png)
+![Clinical Summary Result](docs/screenshots/form.png)
 
 ---
 
