@@ -3,6 +3,8 @@ import SymptomForm from './components/SymptomForm'
 import IntakeSummary from './components/IntakeSummary'
 import HistoryPanel from './components/HistoryPanel'
 
+const API_URL = import.meta.env.VITE_API_URL || ''
+
 export default function App() {
   const [result, setResult] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -16,7 +18,7 @@ export default function App() {
     setResult(null)
     setSelectedIndex(null)
     try {
-      const res = await fetch('/analyze', {
+      const res = await fetch(`${API_URL}/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
