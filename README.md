@@ -1,5 +1,6 @@
 # IntakeAI — AI Healthcare Intake & Clinical Summary Assistant
-
+🌐 Live Demo: https://ai-health-intake-assistant.vercel.app
+🔧 API: https://ai-health-intake-assistant.onrender.com/docs
 > An AI-powered intake assistant that converts unstructured patient symptom descriptions into structured clinical summaries for healthcare staff.
 
 ![Clinical Summary Result](docs/screenshots/form.png)
